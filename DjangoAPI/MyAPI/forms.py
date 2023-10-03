@@ -1,14 +1,14 @@
 from django import forms
 
 class ApprovalForm(forms.Form):
-    firstname = forms.CharField(max_length=15)
-    lastname = forms.CharField(max_length=15)
-    Dependants = forms.IntegerField()
-    ApplicantIncome = forms.IntegerField()
-    CoapplicantIncome = forms.IntegerField()
-    LoanAmount = forms.IntegerField()
-    Loan_Amount_Term = forms.IntegerField()
-    Credit_History = forms.IntegerField()
+    firstname = forms.CharField(max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Enter Firstname'}))
+    lastname = forms.CharField(max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Enter Lastname'}))
+    Dependants = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'Enter Number of Dependents'}))
+    ApplicantIncome = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'Enter Monthly Gross Income'}))
+    CoapplicantIncome = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'Enter Co-Applicant Monthly Gross Income'}))
+    LoanAmount = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'Requested Loan Amount'}))
+    Loan_Amount_Term = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'Loan Term in Months'}))
+    Credit_History = forms.ChoiceField(choices=[('0', 0), ('1', 1), ('2', 2), ('3', 3)])
     Gender = forms.ChoiceField(choices=[('Male', 'Male'), ('Female', 'Female')])
     Married = forms.ChoiceField(choices=[('Yes', 'Yes'), ('No', 'No')])
     Education = forms.ChoiceField(choices=[('Graduated', 'Graduated'), ('Not_Graduated', 'Not_Graduated')])

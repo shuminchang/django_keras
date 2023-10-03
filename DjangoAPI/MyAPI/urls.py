@@ -8,4 +8,5 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('status/', views.approvereject),
     path('form/', views.cxcontact, name = 'cxform'),
+    path('form2/', views.cxcontact2, name = 'cxform2'),
 ]

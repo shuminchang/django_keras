@@ -68,12 +68,40 @@ def cxcontact(request):
             Property_Area = form.cleaned_data['Property_Area']
             myDict = (request.POST).dict()
             df = pd.DataFrame(myDict, index = [0])
-            answer = approvereject(ohevalue(df))
-            # answer = approvereject(ohevalue(df))[0]
-            # Xscalers = approvereject(ohevalue(df))[1]
-            # print(Xscalers)
-            messages.success(request, 'Application Status: {}'.format(answer))
+            answer = approvereject(ohevalue(df))[0]
+            Xscalers = approvereject(ohevalue(df))[1]
+            if int(df['LoanAmount']) < 25000:
+                messages.success(request, 'Application Status: {}'.format(answer))
+            else:
+                messages.success(request, 'Invalid: Your Loan Request Exceeds the $25,000 Limit')
 
     form = ApprovalForm()
 
     return render(request, 'myform/cxform.html', {'form': form})
+
+def cxcontact2(request):
+    if request.method == 'POST':
+        form = ApprovalForm(request.POST)
+        if form.is_valid():
+            Firstname = form.cleaned_data['firstname']
+            Lastname = form.cleaned_data['lastname']
+            Dependants = form.cleaned_data['Dependants']
+            ApplicantIncome = form.cleaned_data['ApplicantIncome']
+            CoapplicantIncome = form.cleaned_data['CoapplicantIncome']
+            LoanAmount = form.cleaned_data['LoanAmount']
+            Loan_Amount_Term = form.cleaned_data['Loan_Amount_Term']
+            Credit_History = form.cleaned_data['Credit_History']
+            Gender = form.cleaned_data['Gender']
+            Married = form.cleaned_data['Married']
+            Education = form.cleaned_data['Education']
+            Self_Employed = form.cleaned_data['Self_Employed']
+            Property_Area = form.cleaned_data['Property_Area']
+            myDict = (request.POST).dict()
+            df = pd.DataFrame(myDict, index = [0])
+            answer = approvereject(ohevalue(df))[0]
+            Xscalers = approvereject(ohevalue(df))[1]
+            messages.success(request, 'Application Status: {}'.format(answer))
+
+    form = ApprovalForm()
+
+    return render(request, 'myform/form.html', {'form': form})

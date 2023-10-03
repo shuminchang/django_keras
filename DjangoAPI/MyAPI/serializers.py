@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from . models import approvols
+from . models import approvals
 
 class approvalsSerializers(serializers.ModelSerializer):
     class Meta:
-        model = approvols
+        model = approvals
         fields = '__all__'
